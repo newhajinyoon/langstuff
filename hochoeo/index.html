@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호초어 합용병서 조합기 (와이드 에디션)</title>
+    <script src="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/HANBatang.woff') format('woff')"></script>
+    <script src="https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/HANBatangB.woff') format('woff')"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Hamchorom';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/HANBatang.woff') format('woff');
+            font-weight: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Hamchorom';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/HANBatangB.woff') format('woff');
+            font-weight: 700;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Hamchorom', 'Noto Sans KR', sans-serif;
+        }
+        .old-hangul {
+            font-family: 'Hamchorom', 'Noto Serif KR', 'Malgun Gothic', serif;
+            line-height: 1.6;
+        }
+        textarea {
+            resize: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+
+    <header class="bg-indigo-700 text-white py-4 shadow-md z-10">
+        <div class="max-w-[90rem] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight">호초어 합용병서 조합기</h1>
+                <p class="text-indigo-200 text-xs mt-1">
+                    ㅅ+ㄱ/ㄷ/ㅂ/ㅈ/ㅋ 또는 ㅂ+ㅅ 조합 변환기
+                </p>
+            </div>
+            <div class="bg-indigo-800/50 px-4 py-2 rounded-lg text-xs text-indigo-100 flex items-center border border-indigo-500/30">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>변환 결과는 함초롬바탕체(Old Hangul)로 표시됩니다.</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col p-4 md:p-6 max-w-[95rem] mx-auto w-full h-full">
+        
+        <div class="flex flex-col lg:flex-row gap-4 h-full flex-grow">
+            
+            <div class="flex-1 flex flex-col bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-slate-100 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
+                    <label for="inputText" class="font-bold text-slate-700 flex items-center gap-2">
+                        <span class="w-2 h-6 bg-indigo-500 rounded-full"></span>
+                        입력 (Input)
+                    </label>
+                    <span class="text-xs text-slate-400">예: ㅅ구, ㅅ박, ㅂ사</span>
+                </div>
+                <textarea 
+                    id="inputText" 
+                    class="w-full flex-grow p-6 outline-none text-lg text-slate-800 placeholder-slate-300 focus:bg-indigo-50/10 transition-colors h-[60vh] lg:h-auto"
+                    placeholder="여기에 텍스트를 입력하세요..."
+                ></textarea>
+            </div>
+
+            <div class="flex items-center justify-center lg:px-2">
+                <div class="bg-indigo-600 text-white p-3 rounded-full shadow-lg lg:rotate-[-90deg] transition-transform duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden relative group">
+                <div class="bg-indigo-50 px-4 py-3 border-b border-indigo-100 flex justify-between items-center">
+                    <label for="outputText" class="font-bold text-indigo-900 flex items-center gap-2">
+                        <span class="w-2 h-6 bg-indigo-600 rounded-full"></span>
+                        변환 결과 (Output)
+                    </label>
+                    <span id="copyStatus" class="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded opacity-0 transition-opacity">복사 완료!</span>
+                </div>
+                <textarea 
+                    id="outputText" 
+                    readonly
+                    class="old-hangul w-full flex-grow p-6 outline-none text-2xl text-slate-900 bg-white h-[60vh] lg:h-auto"
+                ></textarea>
+
+                <button 
+                    onclick="copyToClipboard()" 
+                    class="absolute bottom-6 right-6 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95 z-20"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>
+                    전체 복사
+                </button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const copyStatus = document.getElementById('copyStatus');
+
+        const HANGUL_START = 0xAC00;
+        const HANGUL_END = 0xD7A3;
+        
+        const MAPPINGS = {
+            'ㅅ': {
+                0: 0x112D,  // ㄱ -> ᄭ
+                3: 0x112F,  // ㄷ -> ᄯ
+                7: 0x1132,  // ㅂ -> ᄲ
+                12: 0x1136, // ㅈ -> ᄶ
+                15: 0x1138  // ㅋ -> ᄸ
+            },
+            'ㅂ': {
+                9: 0x1121   // ㅅ -> ᄡ
+            }
+        };
+
+        const JAMO_MEDIAL_BASE = 0x1161; 
+        const JAMO_FINAL_BASE = 0x11A7; 
+
+        function convertToOldHangul(text) {
+            return text.replace(/([ㅅㅂ])([가-힣])/g, (match, prefix, char) => {
+                const charCode = char.charCodeAt(0);
+                const codeIndex = charCode - HANGUL_START;
+                const initialIdx = Math.floor(codeIndex / 588);
+                const medialIdx = Math.floor((codeIndex % 588) / 28);
+                const finalIdx = codeIndex % 28;
+
+                if (MAPPINGS[prefix] && MAPPINGS[prefix].hasOwnProperty(initialIdx)) {
+                    const newInitial = String.fromCharCode(MAPPINGS[prefix][initialIdx]);
+                    const newMedial = String.fromCharCode(JAMO_MEDIAL_BASE + medialIdx);
+                    const newFinal = finalIdx > 0 ? String.fromCharCode(JAMO_FINAL_BASE + finalIdx) : "";
+                    return newInitial + newMedial + newFinal;
+                }
+                return match;
+            });
+        }
+
+        function handleInput() {
+            const currentText = inputText.value;
+            const converted = convertToOldHangul(currentText);
+            outputText.value = converted;
+        }
+
+        function copyToClipboard() {
+            const content = outputText.value;
+            if (!content) return;
+
+            outputText.select();
+            outputText.setSelectionRange(0, 99999); 
+            try {
+                document.execCommand('copy');
+                
+                // Show success status
+                copyStatus.style.opacity = '1';
+                setTimeout(() => {
+                    copyStatus.style.opacity = '0';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+            window.getSelection().removeAllRanges();
+        }
+
+        inputText.addEventListener('input', handleInput);
+
+        // Initial Value
+        inputText.value = "이곳에 입력하면 오른쪽에서 바로 변환됩니다.\n\n[예시]\nㅅ구 -> ᄭᅮ\nㅅ과 -> ᄭᅪ\nㅅ박 -> ᄲᅡᆨ\nㅅ덕 -> ᄯᅥᆨ\nㅅ카 -> ᄸᅡ\nㅂ사 -> ᄡᅡ";
+        handleInput();
+
+    </script>
+</body>
+</html>
